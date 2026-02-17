@@ -75,7 +75,7 @@ Explanation:
 - ```-f exe``` → Windows executable format
 - ```-o``` → Output file
 
-The file was intentionally named ```bashResume.pdf.exe``` to simulate real-world social engineering techniques.
+The file was intentionally named ```Resume.pdf.exe``` to simulate real-world social engineering techniques.
 
 ### Setting up Metasploit Listener
 Commands:
