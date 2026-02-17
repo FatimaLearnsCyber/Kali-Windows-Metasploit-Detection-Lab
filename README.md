@@ -141,3 +141,101 @@ net users
 net localgroup
 ```
 Confirmed full remote interaction with the Windows system.
+
+---
+
+## Phase 4 — Defensive Perspective (Blue Team)
+
+After exploitation, the focus shifted to detection and monitoring.
+
+### Tools Used
+**Sysmon**
+
+System Monitor used to log:
+- Process creation
+- Network connections
+- Parent-child relationships
+- Command-line arguments
+
+### Splunk Enterprise (Free Trial)
+
+Used as a SIEM platform to:
+- Ingest Windows Event Logs
+- Index endpoint telemetry
+- Search suspicious activity
+
+### Splunk Configuration Steps
+
+**1.** Installed Splunk Enterprise
+<br>
+**2.** Installed Sysmon
+<br>
+**3.** Configured ```inputs.conf``` (copied from default to local directory)
+<br>
+**4.** Restarted ```splunkd``` service
+<br>
+**5.** Created custom index: ```endpoint```
+<br>
+**6.** Monitored:
+- Security logs
+- System logs
+- Application logs
+
+Encountered issue:
+- Add-on installation required Splunk account credentials (not web UI login)
+
+Reinstallation was required after credential reset.
+
+Lesson:
+Proper credential management is critical in SIEM configuration.
+
+### Detection Analysis in Splunk
+
+Search queries performed:
+```bash
+index=endpoint
+10.0.2.15
+Resume.pdf.exe
+index=main 
+| table _time,ParentImage,Image,CommandLine
+```
+
+Observed telemetry:
+- Process creation events
+- Parent process relationships
+- Command-line execution
+- Network connection metadata
+- PID tracking
+- Reverse TCP connection timeline
+
+Full attack chain was visible within Splunk logs.
+
+--- 
+
+### Core Insights:
+
+- Reverse shell mechanics and lifecycle
+- Endpoint protection interference behavior
+- Parent-child process tracking
+- Network telemetry correlation
+- SIEM ingestion configuration
+- Troubleshooting security tool misconfigurations
+- Importance of log visibility in detection engineering
+
+### Security Insight
+
+A single executable resulted in:
+- Remote command execution
+- Full system interaction
+- Established reverse TCP session
+
+However, with proper logging enabled:
+- The attack was fully traceable
+- Execution path was visible
+- Network activity was logged
+- Process relationships were preserved
+
+This reinforced the importance of:
+- Endpoint monitoring
+- Log ingestion accuracy
+- Defense-in-depth architecture
