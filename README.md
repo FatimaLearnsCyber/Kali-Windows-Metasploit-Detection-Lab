@@ -13,6 +13,12 @@ The objective was to:
 
 The lab was conducted inside an isolated NAT network to prevent exposure to the host system.
 
+## Value & Impact of the Lab
+
+This lab demonstrates the complete lifecycle of a reverse shell attack, from delivery to execution to detection. 
+It highlights how endpoint visibility, log ingestion, and SIEM analysis can expose malicious activity even when an attacker gains system access.
+The project emphasizes detection engineering, telemetry analysis, and defensive strategy rather than exploitation alone.
+
 ---
 
 ## Lab Architecture
@@ -212,7 +218,16 @@ Full attack chain was visible within Splunk logs.
 
 --- 
 
-### Core Insights:
+## MITRE ATT&CK Techniques Observed
+
+- T1059 – Command and Scripting Interpreter
+- T1105 – Ingress Tool Transfer
+- T1055 – Process Injection (Meterpreter behavior)
+- T1041 – Exfiltration Over C2 Channel
+
+Mapping activity to MITRE ATT&CK helps align detection logic with standardized threat frameworks.
+
+## Core Insights:
 
 - Reverse shell mechanics and lifecycle
 - Endpoint protection interference behavior
@@ -222,7 +237,7 @@ Full attack chain was visible within Splunk logs.
 - Troubleshooting security tool misconfigurations
 - Importance of log visibility in detection engineering
 
-### Security Insight
+## Security Insight
 
 A single executable resulted in:
 - Remote command execution
