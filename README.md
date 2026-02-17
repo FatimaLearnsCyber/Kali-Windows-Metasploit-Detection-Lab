@@ -62,6 +62,8 @@ Initially, no open ports were discovered.
 After enabling Remote Desktop on Windows:
 - Port 3389 (RDP) was detected as open
 
+![Nmap Scan Showing Open Port 3389](screenshots/phase1/6.png)
+
 This confirmed proper enumeration and service discovery.
 
 ---
@@ -81,7 +83,9 @@ Explanation:
 - ```-f exe``` → Windows executable format
 - ```-o``` → Output file
 
-The file was intentionally named ```Resume.pdf.exe``` to simulate real-world social engineering techniques.
+![Payload Generation](screenshots/phase2/8.png)
+
+The file was intentionally named ```Resume.pdf.exe``` to simulate real-world social engineering techniques and the payload was generated as a Windows executable configured for reverse TCP communication.
 
 ### Setting up Metasploit Listener
 Commands:
@@ -138,7 +142,9 @@ Confirmed:
 Verified PID again in Task Manager.
 
 ### Successful Meterpreter Session
-After troubleshooting, a session was successfully established.
+After troubleshooting, a reverse TCP session was successfully established between the Windows endpoint and Kali attacker machine.
+
+![Meterpreter Session](screenshots/phase3/19.png)
 
 Executed commands such as:
 ```bash
@@ -206,6 +212,8 @@ index=main
 | table _time,ParentImage,Image,CommandLine
 ```
 
+![Splunk Process Detection](screenshots/phase4/36.png)
+
 Observed telemetry:
 - Process creation events
 - Parent process relationships
@@ -254,3 +262,8 @@ This reinforced the importance of:
 - Endpoint monitoring
 - Log ingestion accuracy
 - Defense-in-depth architecture
+
+## Documentation & Evidence
+
+All detailed screenshots documenting the full workflow, configuration steps, and troubleshooting process are available in the repository:
+[All Screenshots](./screenshots/)
